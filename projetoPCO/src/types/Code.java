@@ -2,11 +2,11 @@ package types;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 //All documentation is needed.
 
-public class Code implements Cloneable{
-
+public class Code implements Cloneable {
 
     // Stores the list of Colours representing the code.
     private final List<Colour> code;
@@ -58,6 +58,20 @@ public class Code implements Cloneable{
     public String toString() {
         return code.toString();
     }
+    
+    public boolean equals(Object obj) {
+    	if (this == obj) {
+    		return true;
+    	}
+    	if (obj == null || obj.getClass() != this.getClass()) {
+    		return false;
+    	}
+    	Code other = (Code) obj;
+    	return Objects.equals(this.code, other.code);
+    	
+    }
+    
+    
 
 
 }
