@@ -46,6 +46,7 @@ class CodeTestHowManyCorrect {
 	}
 	
 	@Test
+	
 	void teste2() {
 
 		ArrayList<BinaryColour> start = new ArrayList<BinaryColour>();

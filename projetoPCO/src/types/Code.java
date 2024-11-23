@@ -47,7 +47,33 @@ public class Code implements Cloneable {
     }
 
 	public int[] howManyCorrect(Code other) {
-		return null; 
+		if(other == null || other.getLength() != this.getLength()) {
+    		throw new IllegalStateException("Code lengths must match for ");
+		}
+		
+		int correctPositions = 0;
+		int correctColour = 0;
+		
+		List<Colour> unmatchedThis = new ArrayList<>();
+		List<Colour> unmatchedOther = new ArrayList<>();
+				
+		for(int i = 0; i < this.getLength();i++) {
+			if(this.code.get(i).equals(other.code.get(i))) {
+				correctPositions++;		
+			}else {
+				unmatchedThis.add(this.code.get(i));
+				unmatchedOther.add(other.code.get(i));
+			}
+		}
+		
+		
+		for(Colour c: unmatchedThis) {
+			if(unmatchedOther.contains(c)) {
+				correctColour++;
+				unmatchedOther.remove(c);
+			}
+		}
+		return new int[]{correctPositions, correctColour}; 
 	}
 	   /**
      * Returns a textual representation of this Code in the format [c1, c2, c3, ...].
