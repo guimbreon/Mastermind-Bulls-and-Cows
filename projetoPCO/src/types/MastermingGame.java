@@ -2,6 +2,15 @@ package types;
 
 
 //Documentation needed.
+/*
+ * NÃO IMPLEMENTAR OS METODOS DA INTERFACE
+ * 
+ * APENAS IMPLEMENTAR NO ASBTRACTMASTERMINDGAME
+ * 
+ * 
+ * NÃO DUVIDAR 
+ * 
+ * */
 
 public interface MastermingGame {
 	
