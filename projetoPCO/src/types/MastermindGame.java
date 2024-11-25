@@ -2,17 +2,8 @@ package types;
 
 
 //Documentation needed.
-/*
- * NÃO IMPLEMENTAR OS METODOS DA INTERFACE
- * 
- * APENAS IMPLEMENTAR NO ASBTRACTMASTERMINDGAME
- * 
- * 
- * NÃO DUVIDAR 
- * 
- * */
 
-public interface MastermingGame {
+public interface MastermindGame {
 	
 	public static final int MAX_TRIALS = 100;
 	
