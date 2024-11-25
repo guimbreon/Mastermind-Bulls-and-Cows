@@ -51,8 +51,8 @@ public class Code implements Cloneable {
     		throw new IllegalStateException("Code lengths must match for ");
 		}
 		
-		int correctPositions = 0;
-		int correctColour = 0;
+		int correctPositions = 0; //a. - num de cores certas no sitio certo
+		int correctColour = 0; //b. - num de cores certas no sitio errado
 		
 		List<Colour> unmatchedThis = new ArrayList<>();
 		List<Colour> unmatchedOther = new ArrayList<>();
