@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Code implements Cloneable {
 
     // Stores the list of Colours representing the code.
-    private final List<Colour> code;
+    protected final List<Colour> code;
 
     /**
      * Constructs a Code object with the given list of Colours.
