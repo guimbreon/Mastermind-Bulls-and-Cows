@@ -5,7 +5,7 @@ package types;
 
 public interface MastermindGame {
 	
-	public static final int MAX_TRIALS = 100;
+	public static final int MAX_TRIALS = 100;//
 	
 	public void play(Code trial);
 	
