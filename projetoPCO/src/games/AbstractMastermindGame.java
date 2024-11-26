@@ -12,6 +12,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     protected List<Code> attempts; //VERIFY IF ITS REALLY CODE
     protected int numberOfTrials; // Tracks the number of trials made in the current round
     protected boolean secretRevealed; // Indicates if the secret code has been revealed
+    protected Code secretCode;
     protected Colour[] colours; // Array of colours used in the game
     protected int size; // Size of the secret code
     protected int seed; // Seed
@@ -45,11 +46,28 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         // Implementation for playing a trial (can be customized by subclasses)
     }
 
-
+    //Create a secret code
+    
+    /*-----EXTRA-----
+     * 
+     * 
+     * */
+    public void genSecretCode() {
+        List<Colour> secretCodeList = new ArrayList<>();
+		int randomIndex;
+    	for(int i = 0; i < size; i++) {
+    		randomIndex = random.nextInt(colours.length);
+    		secretCodeList.add(colours[randomIndex]);
+    	}
+    	secretCode = new Code(secretCodeList);    	
+    }
+    
     // Method to start a new round of the game
+    //which is genSecretCode and reset the numberOfTrials
     @Override
     public void startNewRound() {
-        // Implementation for starting a new round (can be customized by subclasses)
+    	genSecretCode();
+    	this.numberOfTrials = 0;       
     }
 
     // Method to get the best trial (highest score in terms of A and B values)
@@ -61,8 +79,10 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to provide a colour hint for the player
     @Override
     public Colour hint() {
-        // Implementation for providing a hint (can be overridden by subclasses)
-        return null;
+		int randomIndex;
+		randomIndex = random.nextInt(colours.length);
+		
+        return secretCode.getUniqueColours().get(randomIndex);
     }
 
     // Method to get the number of trials made in the current round

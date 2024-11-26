@@ -10,48 +10,55 @@ public class BullsAndCowsCode extends Code{
 	}
 	
 	public int[] howManyCorrect(Code other) {
-	    if (other == null || other.getLength() != this.getLength()) {
-	        throw new IllegalStateException("Code lengths must match for comparison");
-	    }
-
-	    int a = 0; // Número de cores certas na posição certa
-	    int unmatchedB = 0, unmatchedW = 0; // Contagem de ocorrências de "B" e "W" nas posições erradas
-
-	    List<Colour> unmatchedSecret = new ArrayList<>();
-	    List<Colour> unmatchedAttempt = new ArrayList<>();
-
-	    // Verificar correspondências e coletar cores fora de posição
-	    for (int i = 0; i < this.getLength(); i++) {
-	        if (this.code.get(i).equals(other.code.get(i))) {
-	            a++; // Contar cores na posição correta
-	        } else {
-	            unmatchedSecret.add(this.code.get(i));
-	            unmatchedAttempt.add(other.code.get(i));
-	        }
-	    }
-
-	    // Contar ocorrências de "B" e "W" diretamente das duas listas
-	    for (Colour c : unmatchedSecret) {
-	        if (c.toString().equals("B")) {
-	        	unmatchedB++;
-	        }
-	        else {
-	        	unmatchedW++;
-	        }
-	    }
-
-	    for (Colour c : unmatchedAttempt) {
-	        if (c.toString().equals("B")) {
-	        	unmatchedB = Math.min(unmatchedB, unmatchedB);
-	        }
-	        else {
-	        	unmatchedW = Math.min(unmatchedW, unmatchedW);
-	        }
-	    }
-
-	    return new int[]{a, unmatchedB + unmatchedW}; // Retornar resultados
+		if(other == null || other.getLength() != this.getLength()) {
+    		throw new IllegalStateException("Code lengths must match for ");
+		}
+		
+		int a = 0; //a. - num de cores certas no sitio certo
+		
+		
+		List<Colour> segredo_unmatched = new ArrayList<>();
+		List<Colour> tentativa_unmatched = new ArrayList<>();
+				
+		for(int i = 0; i < this.getLength();i++) {
+			if(this.code.get(i).equals(other.code.get(i))) {
+				a++;		
+			}else {
+				segredo_unmatched.add(this.code.get(i)); //adiciona apenas elementos que não estão certos
+				tentativa_unmatched.add(other.code.get(i)); //adiciona apenas elementos que não estão certos
+			}
+		}
+		
+		int nMaxB = 0; //menor numero de ocorrências erradas "B" entre segredo e tentativa
+		int nMaxW = 0; //menor numero de ocorrências erradas "W" entre segredo e tentativa
+		
+		for(Colour c: segredo_unmatched) {
+			if (c.toString() == "B") {
+				nMaxB++;
+			} else {
+				nMaxW++;
+			}
+		}
+		
+		int nMaxB2 = 0;
+		int nMaxW2 = 0;
+		for(Colour c: tentativa_unmatched) {
+			if (c.toString() == "B" ) {
+				nMaxB2++;
+			} else {
+				nMaxW2++;
+			}
+		}
+		
+		if (nMaxB2 < nMaxB) {
+			nMaxB = nMaxB2;
+		}
+		if (nMaxW2 < nMaxW) {
+			nMaxW = nMaxW2;
+		}
+		
+		return new int[]{a, nMaxB + nMaxW}; 
 	}
-
 	
 
 }

@@ -119,6 +119,22 @@ public class Code implements Cloneable {
     }
     
     
+    /*-----EXTRA-----
+     * ESCREVER ISTO
+     * 
+     * BASICAMENTE SERVE PARA OBTER AS CORES DENTRO DO CÓDIGO
+     * */
+    public List<Colour> getUniqueColours(){
+    	List<Colour> uniqueColours = new ArrayList<>();
+    	for(Colour color: this.code) {
+    		if(!(uniqueColours.contains(color))) {
+    			uniqueColours.add(color);
+    		}
+    	}
+    	
+    	return uniqueColours;
+    }
+    
 
 
 }
