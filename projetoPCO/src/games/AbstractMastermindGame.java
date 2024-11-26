@@ -43,16 +43,43 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to play a trial with a given code and check the result
     @Override
     public void play(Code x) {
-        // Implementation for playing a trial (can be customized by subclasses)
+        if(x.equals(secretCode)) {
+        	secretRevealed = true;
+        }else {
+        	numberOfTrials += 1;
+        	addTrial(x);
+        	System.out.println(attempts);
+        }
     }
-
-    //Create a secret code
-    
     /*-----EXTRA-----
+     * adiciona sem repetir as tentativas
+     * 
+     * ver se for usar em outras funções fora do AbstractMastermindGame
+     * tenho q colocar "protected" e nao private
+     * 
+     *      
+     * AINDA TENHO Q POR O RESULTADO
      * 
      * 
      * */
-    public void genSecretCode() {
+    
+    private void addTrial(Code x) {
+    	  	if(!(attempts.contains(x))) {
+    	  		attempts.add(x);
+    	  	}
+    }
+    
+    /*-----EXTRA-----
+     * 
+     * gera o codigo secreto
+     * 
+     * 
+     * ver se for usar em outras funções fora do AbstractMastermindGame
+     * tenho q colocar "protected" e nao private
+     * 
+     * 
+     * */
+    private void genSecretCode() {
         List<Colour> secretCodeList = new ArrayList<>();
 		int randomIndex;
     	for(int i = 0; i < size; i++) {
@@ -80,8 +107,8 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     @Override
     public Colour hint() {
 		int randomIndex;
-		randomIndex = random.nextInt(colours.length);
-		
+		List<Colour> uniqueColours = secretCode.getUniqueColours();
+		randomIndex = random.nextInt(uniqueColours.size());		
         return secretCode.getUniqueColours().get(randomIndex);
     }
 
