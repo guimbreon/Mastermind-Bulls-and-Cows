@@ -82,7 +82,7 @@ public class Code implements Cloneable {
      */
     @Override
     public String toString() {
-        return code.toString();
+        return code.toString(); //ns se tá bem
     }
     
     /**
