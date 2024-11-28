@@ -48,7 +48,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         }else {
         	numberOfTrials += 1;
         	addTrial(x);
-        	System.out.println(attempts);
         }
     }
     /*-----EXTRA-----
@@ -59,7 +58,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      * 
      *      
      * AINDA TENHO Q POR O RESULTADO
-     * 
+     * TENS QUE RETIRAR A TENTATIVA QUE FOI REPETIDA E PO-LA NO FINAL
      * 
      * */
     
@@ -125,11 +124,67 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public boolean wasSecretRevealed() {
         return secretRevealed; // Returns whether the secret code is revealed
     }
+    
+    public static List<Code> getLast10Attempts(List<Code> attempts) {
+        int size = attempts.size();
+        int last10 = Math.max(size - 10, 0);  // Garante que o índice não será negativo
+        return attempts.subList(last10, size);   // Obtém a sublista dos últimos 10 itens
+    }
 
 
     // Method to return a textual representation of the game state
     @Override
     public String toString() {
-        return null; // Returns a string representation of the game (can be overridden by subclasses)
+        StringBuilder sb = new StringBuilder();
+
+        // Borda superior
+        sb.append("-----------------------------\n");
+
+        // Current Score e Number of Trials
+        sb.append(String.format("| %-22s %-5d |\n", "Current Score:", currentScore));
+        sb.append(String.format("| %-22s %-4d |\n", "Number of Trials:", numberOfTrials));
+
+        // Tentativas - Exibe as últimas 10 tentativas usando getLast10Attempts
+        sb.append(String.format("| %-21s \n", "Attempts:"));
+        List<Code> last10Attempts = getLast10Attempts(attempts); // Obtém as últimas 10 tentativas
+        int startingIndex = Math.max(attempts.size() - 10, 0); // Calcula o índice real da primeira tentativa exibida
+
+        for (int i = 0; i < last10Attempts.size(); i++) {
+            Code attempt = last10Attempts.get(i);
+            sb.append("| Attempt " + (startingIndex + i + 1) + ": "); // Adiciona o índice real
+            sb.append("[");
+            List<Colour> attemptCode = attempt.getCode(); // Obtém a lista de cores da tentativa
+            for (int j = 0; j < attemptCode.size(); j++) {
+                sb.append(attemptCode.get(j)); // Imprime a cor da tentativa
+                if (j < attemptCode.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] |\n");
+        }
+        sb.append(String.format("| %-21s \n", "")); // Fechamento da lista de tentativas
+
+        // Secret Code
+        sb.append(String.format("| Secret Code: "));
+        if (wasSecretRevealed()) {
+        	sb.append(secretCode.toString() + " |\n");
+        } else {
+        	sb.append("[");
+            for (int i = 0; i < secretCode.getLength(); i++) {
+                sb.append("?");
+                if (i < secretCode.getLength() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] |\n");
+        }
+
+        // Borda inferior
+        sb.append("-----------------------------\n");
+       
+        return sb.toString();
+        //PERGUNTAR AO PROF SE IMPRIME-SE AS TENTATIVAS JA EXPERIMENTADAS OU NAO
+        //atualizacao devida caso ja tenham sido experimentadas
     }
+
 }
