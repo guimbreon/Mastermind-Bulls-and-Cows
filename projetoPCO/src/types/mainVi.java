@@ -60,13 +60,13 @@ public  class mainVi {
         attempt6.add(MultiColour.RED);
         Code code6 = new Code(attempt6);
 
-        ArrayList<MultiColour> attempt7 = new ArrayList<>();
-        attempt7.add(MultiColour.PINK);
-        attempt7.add(MultiColour.BLUE);
-        attempt7.add(MultiColour.RED);
-        attempt7.add(MultiColour.GREEN);
-        attempt7.add(MultiColour.YELLOW);
-        Code code7 = new Code(attempt7);
+//        ArrayList<MultiColour> attempt7 = new ArrayList<>();
+//        attempt7.add(MultiColour.PINK);
+//        attempt7.add(MultiColour.BLUE);
+//        attempt7.add(MultiColour.RED);
+//        attempt7.add(MultiColour.GREEN);
+//        attempt7.add(MultiColour.YELLOW);
+//        Code code7 = new Code(attempt7);
 
         ArrayList<MultiColour> attempt8 = new ArrayList<>();
         attempt8.add(MultiColour.BLUE);
@@ -134,7 +134,7 @@ public  class mainVi {
         newjogo.play(code4);
         newjogo.play(code5);
         newjogo.play(code6);
-        newjogo.play(code7);
+   //     newjogo.play(code7);
         newjogo.play(code8);
         newjogo.play(code9);
         newjogo.play(code10);
@@ -143,7 +143,10 @@ public  class mainVi {
         newjogo.play(code13);
         newjogo.play(code14);
         
-        System.out.print(newjogo.toString());
+        
+       // newjogo.bestTrial();
+       System.out.print(newjogo.bestTrial());
+  //     System.out.print(newjogo.toString());
         
 	}
 
