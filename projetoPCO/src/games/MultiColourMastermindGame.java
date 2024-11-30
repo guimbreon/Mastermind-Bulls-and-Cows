@@ -20,7 +20,6 @@ public class MultiColourMastermindGame extends AbstractMastermindGame{
 
 	@Override
 	public boolean isRoundFinished() {
-		// TODO Auto-generated method stub
 		if (wasSecretRevealed() || MAX_TRIALS == getNumberOfTrials()) {
 			return true;
 		}
