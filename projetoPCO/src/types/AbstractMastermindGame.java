@@ -177,16 +177,19 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to return a textual representation of the game state
     @Override
     public String toString() {
+    	
         StringBuilder sb = new StringBuilder();
-
+        
+        String EOL = System.lineSeparator();
 
         // Current Score e Number of Trials
-        sb.append("Number of Trials = " + numberOfTrials + "\n");
-        sb.append("Score = " + currentScore + "\n");
+        sb.append("Number of Trials = " + numberOfTrials + EOL);
+        sb.append("Score = " + currentScore + EOL);
         
 
         if (wasSecretRevealed()) {
-            sb.append(secretCode.toString() + "\n");
+            sb.append(secretCode.toString() + EOL);
+
         } else {
             sb.append("[");
             for (int i = 0; i < secretCode.getLength(); i++) {
@@ -195,13 +198,15 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                     sb.append(", ");
                 }
             }
-            sb.append("]\n");
+            
+            sb.append("]" + EOL);
+
         }
         sb.append("\n");
+         //ESTE \n
 
         // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
         List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
-        int startingIndex = Math.max(attempts.size() - 10, 0); // Calcula o índice real da primeira tentativa exibida
 
         // Iterando sobre as últimas 10 tentativas
         for (int i = 0; i < last10Attempts.size(); i++) {
@@ -219,9 +224,10 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                     sb.append(", ");
                 }
             }
-            sb.append("]    " + result[0] + " " + result[1] + " \n");  // Exibe A e B
+            sb.append("]    " + result[0] + " " + result[1]);  // Exibe A e B
+            sb.append(EOL);
         }
-
+        
 
         return sb.toString();
     }
