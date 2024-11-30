@@ -50,6 +50,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         	addTrial(x);
         	updateScore();
         }
+        
     }
     /*-----EXTRA-----
      * adiciona sem repetir as tentativas
@@ -165,7 +166,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public static List<Object[]> getLast10Attempts(List<Object[]> attempts) {
         int size = attempts.size();
         int last10 = Math.max(size - 10, 0);  // Garante que o índice não seja negativo
-        return attempts.subList(last10, size);   // Obtém a sublista das últimas 10 tentativas
+        return attempts.subList(last10, size); 
     }
 
 

@@ -30,9 +30,9 @@ public class BullsAndCows extends AbstractMastermindGame {
 
 	@Override
 	public boolean updateScore() {
-		this.currentScore += 3;//isto é só teste :P para a minha funcao funcionar, n funciona como o stor disse
-		return false;
-	}
+        currentScore += 2000;
+        return true;
+     }
 	
 	//FALTA COLOUR HINT REIMPLEMENRZ
 	@Override

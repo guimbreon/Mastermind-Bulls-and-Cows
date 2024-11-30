@@ -115,7 +115,6 @@ public class Code implements Cloneable {
     	}
     	Code other = (Code) obj;
     	return Objects.equals(this.code, other.code);
-    	
     }
     
     
