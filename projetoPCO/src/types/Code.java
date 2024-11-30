@@ -118,7 +118,7 @@ public class Code implements Cloneable {
     }
     
     
-    /*-----EXTRA-----
+    /*
      * ESCREVER ISTO
      * 
      * BASICAMENTE SERVE PARA OBTER AS CORES DENTRO DO CÓDIGO

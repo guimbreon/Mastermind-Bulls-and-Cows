@@ -137,7 +137,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         }
         
         System.out.println("Secret Code:" + secretCode);
-        
+
 
         return bestTrial; // Retorna o melhor teste encontrado
     }
@@ -147,12 +147,10 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to provide a colour hint for the player
     @Override
     public Colour hint() {
-		int randomIndex;
-		List<Colour> uniqueColours = secretCode.getUniqueColours();
-		randomIndex = random.nextInt(uniqueColours.size());		
-        return secretCode.getUniqueColours().get(randomIndex);
+        int randomIndex;
+        randomIndex = random.nextInt(secretCode.getLength());
+        return secretCode.getCode().get(randomIndex);
     }
-    
 
     // Method to get the number of trials made in the current round
     @Override

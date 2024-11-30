@@ -40,7 +40,6 @@ class CodeTestHint {
 
 		Colour expected = BinaryColour.WHITE;
 		Colour actual = jogo.hint();
-
 		assertEquals(expected, actual);
 
 
