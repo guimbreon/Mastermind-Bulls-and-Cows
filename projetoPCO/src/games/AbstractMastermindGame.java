@@ -48,6 +48,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         }else {
         	numberOfTrials += 1;
         	addTrial(x);
+        	updateScore();
         }
     }
     /*-----EXTRA-----

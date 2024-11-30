@@ -1,10 +1,11 @@
 package types;
 import java.util.ArrayList;
 
+
 import java.util.Arrays;
 import java.util.List;
 
-import games.MultiColourMastermindGame;
+import games.*;
 
 public  class mainGui {
 	
@@ -12,6 +13,32 @@ public  class mainGui {
 	private static BullsAndCowsCode codeToTest2;
 	
 	public static void main (String[] args) {
+		
+//		ArrayList<BinaryColour> attempt1 = new ArrayList<>();
+//		attempt1.add(BinaryColour.BLACK);
+//		attempt1.add(BinaryColour.WHITE);
+//		attempt1.add(BinaryColour.BLACK);
+//		attempt1.add(BinaryColour.WHITE);
+//		attempt1.add(BinaryColour.BLACK);
+//		Code code1 = new Code(attempt1);
+//		
+//		ArrayList<BinaryColour> attempt2 = new ArrayList<>();
+//		attempt2.add(BinaryColour.BLACK);
+//		attempt2.add(BinaryColour.WHITE);
+//		attempt2.add(BinaryColour.BLACK);
+//		attempt2.add(BinaryColour.WHITE);
+//		attempt2.add(BinaryColour.BLACK);
+//     	Code code2 = new Code(attempt2);
+//
+//		ArrayList<BinaryColour> attempt3 = new ArrayList<>();
+//		attempt3.add(BinaryColour.BLACK);
+//		attempt3.add(BinaryColour.BLACK);
+//		attempt3.add(BinaryColour.BLACK);
+//		attempt3.add(BinaryColour.BLACK);
+//		attempt3.add(BinaryColour.BLACK);
+//		Code code3 = new Code(attempt3);
+//
+//		BullsAndCows jogo = new BullsAndCows(3, 5, BinaryColour.values());
 
         ArrayList<MultiColour> attempt1 = new ArrayList<>();
         attempt1.add(MultiColour.BLUE);
@@ -37,8 +64,6 @@ public  class mainGui {
         attempt3.add(MultiColour.RED);
         attempt3.add(MultiColour.YELLOW);
         Code code3 = new Code(attempt3);
-
-		
 		
 		MultiColourMastermindGame jogo = new MultiColourMastermindGame(3, 5, MultiColour.values());
 	
@@ -52,8 +77,11 @@ public  class mainGui {
 		jogo.play(code3);
 		jogo.play(code3);
 		jogo.play(code3);
-
+		
+		System.out.println(jogo.score());
 		System.out.println(jogo.hint());
+		System.out.println(jogo.score());
+		
 		
 		
 //		ArrayList<BinaryColour> start = new ArrayList<BinaryColour>();
