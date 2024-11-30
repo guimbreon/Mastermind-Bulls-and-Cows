@@ -67,11 +67,23 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      * */
     
     private void addTrial(Code x) {
-    	if (!attempts.contains(x)) {
-	        int[] result = secretCode.howManyCorrect(x); // Get correctness
-	        Object[] trial = {x, result}; // Create an Object[] to store Code and correctness
-	        attempts.add(trial); // Add it to the list
-    	}
+    	boolean exists = false;
+
+    	
+	    for (Object[] attempt : attempts) {
+	        Code existingCode = (Code) attempt[0]; //check code
+	        if (existingCode.equals(x)) { //using equals to compare
+	            exists = true;
+	            break;
+	        }
+	    }
+
+	    
+	    if (!exists) {
+	        int[] result = secretCode.howManyCorrect(x); 
+	        Object[] trial = {x, result};
+	        attempts.add(trial);
+	    }
     }
 
     
@@ -202,8 +214,11 @@ public abstract class AbstractMastermindGame implements MastermindGame {
             sb.append("]" + EOL);
 
         }
-        sb.append("\n");
-         //ESTE \n
+        if(attempts.size() == 0) {
+            sb.append(EOL);         	
+        }else {      	
+            sb.append("\n");    	
+        }
 
         // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
         List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
