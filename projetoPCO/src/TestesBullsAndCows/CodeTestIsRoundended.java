@@ -218,8 +218,10 @@ class CodeTestIsRoundended {
 		Code tentativa = new Code(trial);
 		
 		for (int i = 0; i <= MastermindGame.MAX_TRIALS; i++) {
-			jogo.play(tentativa);
+			jogo.play(tentativa);			
 		}
+		
+		
 		
 
 		boolean expected = true;

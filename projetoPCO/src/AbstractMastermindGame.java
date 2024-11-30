@@ -43,14 +43,15 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to play a trial with a given code and check the result
     @Override
     public void play(Code x) {
+    	System.out.println(secretCode);
     	numberOfTrials += 1;
         if(!wasSecretRevealed()) {
         	addTrial(x);
          }
         
-        if(x.equals(secretCode) && !wasSecretRevealed()) {
+        if(x.equals(secretCode)) {
         	secretRevealed = true;
-            updateScore();
+            updateScore();    
         }
         
     }
@@ -67,11 +68,9 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      * */
     
     private void addTrial(Code x) {
-    	if (!attempts.contains(x)) {
-	        int[] result = secretCode.howManyCorrect(x); // Get correctness
-	        Object[] trial = {x, result}; // Create an Object[] to store Code and correctness
-	        attempts.add(trial); // Add it to the list
-    	}
+        int[] result = secretCode.howManyCorrect(x); // Get correctness
+        Object[] trial = {x, result}; // Create an Object[] to store Code and correctness
+        attempts.add(trial); // Add it to the list
     }
 
     
@@ -101,6 +100,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public void startNewRound() {
     	genSecretCode();
     	this.numberOfTrials = 0;
+    	this.currentScore = 0;
     	this.secretRevealed = false;
     }
 
@@ -181,25 +181,15 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
+        // Borda superior
+        sb.append("-----------------------------\n");
 
         // Current Score e Number of Trials
-        sb.append("Number of Trials = " + numberOfTrials + "\n");
-        sb.append("Score = " + currentScore + "\n");
-        
+        sb.append(String.format("| %-22s %-5d |\n", "Current Score:", currentScore));
+        sb.append(String.format("| %-22s %-4d |\n", "Number of Trials:", numberOfTrials));
 
-        if (wasSecretRevealed()) {
-            sb.append(secretCode.toString() + "\n");
-        } else {
-            sb.append("[");
-            for (int i = 0; i < secretCode.getLength(); i++) {
-                sb.append("?");
-                if (i < secretCode.getLength() - 1) {
-                    sb.append(", ");
-                }
-            }
-            sb.append("]\n");
-        }
-        sb.append("\n");
+        // Tentativas - Exibe as últimas 10 tentativas usando getLast10Attempts
+        sb.append("| Attempts:\n");
 
         // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
         List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
@@ -211,6 +201,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
             Code code = (Code) attempt[0];  // Extraímos o Code
             int[] result = (int[]) attempt[1];  // Extraímos o array de resultados [A, B]
 
+            sb.append("| Attempt " + (startingIndex + i + 1) + ": "); // Adiciona o índice real
             sb.append("[");
 
             // Obtém e exibe as cores do código da tentativa
@@ -221,9 +212,27 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                     sb.append(", ");
                 }
             }
-            sb.append("]    " + result[0] + " " + result[1] + " \n");  // Exibe A e B
+            sb.append("] -> A: " + result[0] + ", B: " + result[1] + " |\n");  // Exibe A e B
+        }
+        sb.append("|-----------------------------|\n");
+
+        // Secret Code
+        sb.append("| Secret Code: ");
+        if (wasSecretRevealed()) {
+            sb.append(secretCode.toString() + " |\n");
+        } else {
+            sb.append("[");
+            for (int i = 0; i < secretCode.getLength(); i++) {
+                sb.append("?");
+                if (i < secretCode.getLength() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] |\n");
         }
 
+        // Borda inferior
+        sb.append("-----------------------------\n");
 
         return sb.toString();
     }

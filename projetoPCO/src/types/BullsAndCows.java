@@ -16,7 +16,7 @@ public class BullsAndCows extends AbstractMastermindGame {
 	@Override
 	public boolean isRoundFinished() {
 		// TODO Auto-generated method stub
-		if (wasSecretRevealed() || MAX_TRIALS == getNumberOfTrials()) {
+		if (wasSecretRevealed() || getNumberOfTrials() >= MAX_TRIALS) {
 			return true;
 		}
 		

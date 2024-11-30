@@ -220,10 +220,12 @@ class CodeTestIsRoundended {
 		
 		for (int i = 1; i <= MastermindGame.MAX_TRIALS; i++) {
 			jogo.play(tentativa);
+			
 		}
 		
 
 		boolean expected = true;
+		System.out.println(jogo);
 
 		boolean actual = jogo.isRoundFinished();
 
