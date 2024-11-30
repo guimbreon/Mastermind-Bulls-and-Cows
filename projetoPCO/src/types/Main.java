@@ -1,16 +1,18 @@
-package games;
+package types;
 
 import java.util.ArrayList;
 
+import java.util.Random;
 import java.util.Scanner;
-
-import types.*;
 
 
 
 public class Main {
 	protected static Scanner scanner = new Scanner(System.in);
 	protected static boolean stillPlaying = true;
+	protected static boolean firstPlay = true;
+	
+	protected static int seed;
 
 	public static void main(String[] args) {
 		
@@ -19,7 +21,9 @@ public class Main {
 			System.out.println("Which gamemode do you want to play?\n	1-MultiColour Mastermind\n	2-BullsAndCows");
 			String gameMode = scanner.nextLine();
 			
+			Random random = new Random();
 			
+			seed = random.nextInt(8052004);
 			
 			ClearConsole();
 			
@@ -28,13 +32,20 @@ public class Main {
 				case "1":
 					System.out.println("\nWELCOME TO MULTICOLOUR MASTERMIND!!!\n");
 					
-					MultiColourMastermindGame multiColourGame = new MultiColourMastermindGame(3, 5, MultiColour.values());
+					MultiColourMastermindGame multiColourGame = new MultiColourMastermindGame(seed, 4, MultiColour.values());
 					multiColourGame.startNewRound();
 					
 					while(!multiColourGame.isRoundFinished()) {
-						Code code = createCode(MultiColour.values());
+						if(!firstPlay) {
+							System.out.println(multiColourGame.toString());
+						}
+						Code code = createCode(MultiColour.values(), "multiColour");
 						multiColourGame.play(code);
+						ClearConsole();
 					}
+
+					System.out.println("CONGRATS YOU HAVE GUESSES THE CODE CORRECTLY!!!");
+					System.out.println(multiColourGame.toString());
 					
 					
 					keepPlaying();
@@ -42,11 +53,21 @@ public class Main {
 				case "2":
 					System.out.println("\nWELCOME TO MULTICOLOUR MASTERMIND!!!");
 					
-					BullsAndCows binaryGame = new BullsAndCows(3, 5, BinaryColour.values());
+					BullsAndCows binaryGame = new BullsAndCows(seed, 4, BinaryColour.values());
 					binaryGame.startNewRound();
 					
 					
-					createCode(BinaryColour.values());
+					while(!binaryGame.isRoundFinished()) {
+						if(!firstPlay) {
+							System.out.println(binaryGame.toString());
+						}
+						Code code = createCode(BinaryColour.values(), "binary");
+						binaryGame.play(code);
+						ClearConsole();
+					}
+
+					System.out.println("CONGRATS YOU HAVE GUESSES THE CODE CORRECTLY!!!");
+					System.out.println(binaryGame.toString());
 					
 					
 					keepPlaying();
@@ -72,7 +93,6 @@ public class Main {
 	
 	
 	private static void keepPlaying() {
-
 		System.out.println("Do you wish to keep playing or no?\n	1-Yes\n	2-No");
 		String keepPlay = scanner.nextLine();
 
@@ -85,7 +105,7 @@ public class Main {
 	}
 	
 	
-	private static Code createCode(Colour[] availColours) {
+	private static Code createCode(Colour[] availColours, String type) {
 		String allColours = "";
 		
 		//colors
@@ -94,19 +114,40 @@ public class Main {
 	    }
 		
 		
-		System.out.println("What is your guess for the secret code??\n	Information: The available colours are:");
-		System.out.println(allColours);
+		System.out.println("What is your guess for the secret code??");
+		System.out.println("\tInformation: The available colours are:");
+		System.out.println("\t" + allColours);
 		System.out.println("	Let's say you want to type a code with the colors Blue, Red, Red and then Pink. You will type in the terminal: 'B R R P'\n");
+		
+		firstPlay = false;
 
 
 		String futureCode = scanner.nextLine();
 
 
 		String[] splitCode = futureCode.split(" ");
-		ArrayList<MultiColour> attempt = 	transformToColors(splitCode);
-		
-		
-		return new Code(attempt);				
+		if(type == "multiColour") {
+			ArrayList<MultiColour> attempt = transformToColors(splitCode);
+			return new Code(attempt);
+		}else {
+			ArrayList<BinaryColour> attempt = transformToBinary(splitCode);
+			return new Code(attempt);
+			
+		}
+	}
+
+
+	private static ArrayList<BinaryColour> transformToBinary(String[] stringColors) {
+		ArrayList<BinaryColour> result = new ArrayList<>();
+        for (String colorCode : stringColors) {
+            for (BinaryColour colour : BinaryColour.values()) {
+                if (colour.toString().equals(colorCode)) {
+                    result.add(colour);
+                    break;
+                }
+            }
+        }
+        return result;
 	}
 
 

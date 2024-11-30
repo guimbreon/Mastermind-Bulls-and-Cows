@@ -1,8 +1,8 @@
-package games;
+package types;
 
 import java.util.List;
 
-import types.Colour;
+
 
 public class MultiColourMastermindGame extends AbstractMastermindGame{
 	
