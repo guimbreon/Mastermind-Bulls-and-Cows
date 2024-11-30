@@ -31,8 +31,7 @@ public class BullsAndCows extends AbstractMastermindGame {
 	@Override
 	public boolean updateScore() {
         currentScore += 2000;
-        return true;
-     }
+        return true;}
 	
 	//FALTA COLOUR HINT REIMPLEMENRZ
 	@Override

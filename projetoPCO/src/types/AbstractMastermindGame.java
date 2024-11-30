@@ -27,6 +27,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         this.currentScore = 0;
         this.numberOfTrials = 0;
         this.secretRevealed = false;
+        startNewRound();
     }
     // Abstract method to calculate the current score
     public abstract int score();
@@ -43,13 +44,14 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     @Override
     public void play(Code x) {
         if(x.equals(secretCode)) {
-        	secretRevealed = true;
+            secretRevealed = true;
         }else {
-        	numberOfTrials += 1;
-        	addTrial(x);
-        	updateScore();
+            numberOfTrials += 1;
+            addTrial(x);
+            if (isRoundFinished()) {
+                  updateScore();
+            }
         }
-        
     }
     /*-----EXTRA-----
      * adiciona sem repetir as tentativas

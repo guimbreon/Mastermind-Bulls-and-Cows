@@ -14,8 +14,7 @@ public class MultiColourMastermindGame extends AbstractMastermindGame{
 
 	@Override
 	public int score() {
-		// TODO Auto-generated method stub
-		return 0;
+		return currentScore;
 	}
 
 	@Override
@@ -28,10 +27,15 @@ public class MultiColourMastermindGame extends AbstractMastermindGame{
 	}
 
 	@Override
-	public boolean updateScore() {
-		this.currentScore += 3;//isto é só teste :P para a minha funcao funcionar, n funciona como o stor disse
-		return false;
-	}
+    public boolean updateScore() {
+        if (getNumberOfTrials() <= 2) {
+            currentScore += 1000 / (numberOfHints + 1); }
+        else if (getNumberOfTrials() <= 5) {
+            currentScore += 50 / (numberOfHints + 1); }
+        else {
+            currentScore += 20 / (numberOfHints + 1); }
+        return true;
+    }
 	
 	@Override
     public Colour hint() {
