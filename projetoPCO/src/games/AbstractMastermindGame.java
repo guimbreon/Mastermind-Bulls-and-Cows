@@ -9,7 +9,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 
     // Attributes needed for the game logic
     protected int currentScore; // Stores the current score of the game
-    protected List<Code> attempts; //VERIFY IF ITS REALLY CODE
+    protected List<Object[]> attempts; //VERIFY IF ITS REALLY CODE
     protected int numberOfTrials; // Tracks the number of trials made in the current round
     protected boolean secretRevealed; // Indicates if the secret code has been revealed
     protected Code secretCode;
@@ -48,7 +48,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         }else {
         	numberOfTrials += 1;
         	addTrial(x);
-        	System.out.println(attempts);
         }
     }
     /*-----EXTRA-----
@@ -59,15 +58,16 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      * 
      *      
      * AINDA TENHO Q POR O RESULTADO
-     * 
+     * TENS QUE RETIRAR A TENTATIVA QUE FOI REPETIDA E PO-LA NO FINAL
      * 
      * */
     
     private void addTrial(Code x) {
-    	  	if(!(attempts.contains(x))) {
-    	  		attempts.add(x);
-    	  	}
+        int[] result = secretCode.howManyCorrect(x); // Get correctness
+        Object[] trial = {x, result}; // Create an Object[] to store Code and correctness
+        attempts.add(trial); // Add it to the list
     }
+
     
     /*-----EXTRA-----
      * 
@@ -100,8 +100,42 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to get the best trial (highest score in terms of A and B values)
     @Override
     public Code bestTrial() {
-        return null; // Returns the best trial (this can be implemented by subclasses)
+        if (attempts == null || attempts.isEmpty()) {
+            return null; // Retorna null se a lista de tentativas estiver vazia
+        }
+
+        Code bestTrial = null;
+        int bestA = -1; // Inicializa com valores impossíveis para facilitar a comparação
+        int bestB = -1;
+
+        for (Object[] attempt : attempts) {
+        	int[] resultados = (int[]) attempt[1];  // Extraímos
+        	//System.out.println(attempt[0] + " ");
+        	Code codigo = (Code) attempt[0];
+        	System.out.println(codigo.toString() + ": a_" + resultados[0] + "  b_" + resultados[1]);
+        	
+            int[] correct = secretCode.howManyCorrect(codigo);
+            int a = correct[0];
+            int b = correct[1];
+
+            // Atualiza o melhor teste baseado nas condições
+            if (a > bestA || 
+                (a == bestA && b > bestB) || 
+                (a == bestA && b == bestB && (bestTrial == null || attempt.toString().compareTo(bestTrial.toString()) < 0))) {
+                
+                bestTrial = codigo;
+                bestA = a;
+                bestB = b;
+            }
+        }
+        
+        System.out.println("Secret Code:" + secretCode);
+        
+
+        return bestTrial; // Retorna o melhor teste encontrado
     }
+
+
 
     // Method to provide a colour hint for the player
     @Override
@@ -111,6 +145,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 		randomIndex = random.nextInt(uniqueColours.size());		
         return secretCode.getUniqueColours().get(randomIndex);
     }
+    
 
     // Method to get the number of trials made in the current round
     @Override
@@ -125,11 +160,75 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public boolean wasSecretRevealed() {
         return secretRevealed; // Returns whether the secret code is revealed
     }
+    
+    public static List<Object[]> getLast10Attempts(List<Object[]> attempts) {
+        int size = attempts.size();
+        int last10 = Math.max(size - 10, 0);  // Garante que o índice não seja negativo
+        return attempts.subList(last10, size);   // Obtém a sublista das últimas 10 tentativas
+    }
+
 
 
     // Method to return a textual representation of the game state
     @Override
     public String toString() {
-        return null; // Returns a string representation of the game (can be overridden by subclasses)
+        StringBuilder sb = new StringBuilder();
+
+        // Borda superior
+        sb.append("-----------------------------\n");
+
+        // Current Score e Number of Trials
+        sb.append(String.format("| %-22s %-5d |\n", "Current Score:", currentScore));
+        sb.append(String.format("| %-22s %-4d |\n", "Number of Trials:", numberOfTrials));
+
+        // Tentativas - Exibe as últimas 10 tentativas usando getLast10Attempts
+        sb.append("| Attempts:\n");
+
+        // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
+        List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
+        int startingIndex = Math.max(attempts.size() - 10, 0); // Calcula o índice real da primeira tentativa exibida
+
+        // Iterando sobre as últimas 10 tentativas
+        for (int i = 0; i < last10Attempts.size(); i++) {
+            Object[] attempt = last10Attempts.get(i); // Cada item é um array de Object[]: [Code, int[]]
+            Code code = (Code) attempt[0];  // Extraímos o Code
+            int[] result = (int[]) attempt[1];  // Extraímos o array de resultados [A, B]
+
+            sb.append("| Attempt " + (startingIndex + i + 1) + ": "); // Adiciona o índice real
+            sb.append("[");
+
+            // Obtém e exibe as cores do código da tentativa
+            List<Colour> attemptCode = code.getCode(); // Assumindo que Code tem um método getCode() que retorna uma lista de cores
+            for (int j = 0; j < attemptCode.size(); j++) {
+                sb.append(attemptCode.get(j)); // Imprime a cor da tentativa
+                if (j < attemptCode.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] -> A: " + result[0] + ", B: " + result[1] + " |\n");  // Exibe A e B
+        }
+        sb.append("|-----------------------------|\n");
+
+        // Secret Code
+        sb.append("| Secret Code: ");
+        if (wasSecretRevealed()) {
+            sb.append(secretCode.toString() + " |\n");
+        } else {
+            sb.append("[");
+            for (int i = 0; i < secretCode.getLength(); i++) {
+                sb.append("?");
+                if (i < secretCode.getLength() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] |\n");
+        }
+
+        // Borda inferior
+        sb.append("-----------------------------\n");
+
+        return sb.toString();
     }
+
 }
+
