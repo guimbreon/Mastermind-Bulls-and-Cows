@@ -43,15 +43,16 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to play a trial with a given code and check the result
     @Override
     public void play(Code x) {
+    	numberOfTrials += 1;
+        if(!wasSecretRevealed()) {
+        	addTrial(x);
+            updateScore();
+         }
+        
         if(x.equals(secretCode)) {
-            secretRevealed = true;
-        }else {
-            numberOfTrials += 1;
-            addTrial(x);
-            if (isRoundFinished()) {
-                  updateScore();
-            }
+        	secretRevealed = true;
         }
+        
     }
     /*-----EXTRA-----
      * adiciona sem repetir as tentativas
@@ -97,7 +98,8 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     @Override
     public void startNewRound() {
     	genSecretCode();
-    	this.numberOfTrials = 0;       
+    	this.numberOfTrials = 0;
+    	this.secretRevealed = false;
     }
 
     // Method to get the best trial (highest score in terms of A and B values)

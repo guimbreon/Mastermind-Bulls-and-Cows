@@ -29,11 +29,15 @@ public class MultiColourMastermindGame extends AbstractMastermindGame{
 	@Override
     public boolean updateScore() {
         if (getNumberOfTrials() <= 2) {
-            currentScore += 1000 / (numberOfHints + 1); }
+        	
+            currentScore += 100 / (numberOfHints + 1); }
         else if (getNumberOfTrials() <= 5) {
             currentScore += 50 / (numberOfHints + 1); }
         else {
             currentScore += 20 / (numberOfHints + 1); }
+
+    	System.out.println(currentScore);
+		System.out.println(getNumberOfTrials());
         return true;
     }
 	
