@@ -27,6 +27,8 @@ class CodeTestToScore {
 		int actual = jogo.score();
 
 		assertEquals(expected, actual);
+		
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 
 	}
@@ -53,6 +55,7 @@ class CodeTestToScore {
 
 		int expected = 0;
 		int actual = jogo.score();
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 		assertEquals(expected, actual);
 	}
@@ -79,6 +82,7 @@ class CodeTestToScore {
 
 		int expected = 0;
 		int actual = jogo.score();
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 		assertEquals(expected, actual);
 	}
@@ -114,6 +118,7 @@ class CodeTestToScore {
 
 		int expected = 0;
 		int actual = jogo.score();
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 		assertEquals(expected, actual);
 	}
@@ -157,6 +162,7 @@ class CodeTestToScore {
 
 		int expected = 50;
 		int actual = jogo.score();
+		System.out.println("CIMA");
 
 		assertEquals(expected, actual);
 	}
@@ -194,6 +200,7 @@ class CodeTestToScore {
 
 		int expected = 100;
 		int actual = jogo.score();
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 		assertEquals(expected, actual);
 	}
@@ -237,6 +244,7 @@ class CodeTestToScore {
 
 		int expected = 50;
 		int actual = jogo.score();
+		System.out.println("asdfikajsdfjadsjfjladkjfkljaklsdjfklajsdlkfjklasdjflk");
 
 		assertEquals(expected, actual);
 	}

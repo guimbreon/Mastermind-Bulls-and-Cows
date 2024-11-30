@@ -43,14 +43,15 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to play a trial with a given code and check the result
     @Override
     public void play(Code x) {
+    	System.out.println(secretCode);
     	numberOfTrials += 1;
         if(!wasSecretRevealed()) {
         	addTrial(x);
-            updateScore();
          }
         
         if(x.equals(secretCode)) {
         	secretRevealed = true;
+            updateScore();    
         }
         
     }
