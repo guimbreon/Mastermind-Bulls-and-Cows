@@ -49,9 +49,9 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         	addTrial(x);
          }
         
-        if(x.equals(secretCode) && !wasSecretRevealed()) {
+        if(x.equals(secretCode)) {
         	secretRevealed = true;
-            updateScore();
+            updateScore();    
         }
         
     }
@@ -68,23 +68,9 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      * */
     
     private void addTrial(Code x) {
-    	boolean exists = false;
-
-    	
-	    for (Object[] attempt : attempts) {
-	        Code existingCode = (Code) attempt[0]; //check code
-	        if (existingCode.equals(x)) { //using equals to compare
-	            exists = true;
-	            break;
-	        }
-	    }
-
-	    
-	    if (!exists) {
-	        int[] result = secretCode.howManyCorrect(x); 
-	        Object[] trial = {x, result};
-	        attempts.add(trial);
-	    }
+        int[] result = secretCode.howManyCorrect(x); // Get correctness
+        Object[] trial = {x, result}; // Create an Object[] to store Code and correctness
+        attempts.add(trial); // Add it to the list
     }
 
     
@@ -114,6 +100,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     public void startNewRound() {
     	genSecretCode();
     	this.numberOfTrials = 0;
+    	this.currentScore = 0;
     	this.secretRevealed = false;
     }
 
@@ -150,7 +137,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         }
         
         System.out.println("Secret Code:" + secretCode);
-
+        
 
         return bestTrial; // Retorna o melhor teste encontrado
     }
@@ -160,10 +147,12 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to provide a colour hint for the player
     @Override
     public Colour hint() {
-        int randomIndex;
-        randomIndex = random.nextInt(secretCode.getLength());
-        return secretCode.getCode().get(randomIndex);
+		int randomIndex;
+		List<Colour> uniqueColours = secretCode.getUniqueColours();
+		randomIndex = random.nextInt(uniqueColours.size());		
+        return secretCode.getUniqueColours().get(randomIndex);
     }
+    
 
     // Method to get the number of trials made in the current round
     @Override
@@ -190,39 +179,21 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     // Method to return a textual representation of the game state
     @Override
     public String toString() {
-    	
         StringBuilder sb = new StringBuilder();
-        
-        String EOL = System.lineSeparator();
+
+        // Borda superior
+        sb.append("-----------------------------\n");
 
         // Current Score e Number of Trials
-        sb.append("Number of Trials = " + numberOfTrials + EOL);
-        sb.append("Score = " + currentScore + EOL);
-        
+        sb.append(String.format("| %-22s %-5d |\n", "Current Score:", currentScore));
+        sb.append(String.format("| %-22s %-4d |\n", "Number of Trials:", numberOfTrials));
 
-        if (wasSecretRevealed()) {
-            sb.append(secretCode.toString() + EOL);
-
-        } else {
-            sb.append("[");
-            for (int i = 0; i < secretCode.getLength(); i++) {
-                sb.append("?");
-                if (i < secretCode.getLength() - 1) {
-                    sb.append(", ");
-                }
-            }
-            
-            sb.append("]" + EOL);
-
-        }
-        if(attempts.size() == 0) {
-            sb.append(EOL);         	
-        }else {      	
-            sb.append("\n");    	
-        }
+        // Tentativas - Exibe as últimas 10 tentativas usando getLast10Attempts
+        sb.append("| Attempts:\n");
 
         // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
         List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
+        int startingIndex = Math.max(attempts.size() - 10, 0); // Calcula o índice real da primeira tentativa exibida
 
         // Iterando sobre as últimas 10 tentativas
         for (int i = 0; i < last10Attempts.size(); i++) {
@@ -230,6 +201,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
             Code code = (Code) attempt[0];  // Extraímos o Code
             int[] result = (int[]) attempt[1];  // Extraímos o array de resultados [A, B]
 
+            sb.append("| Attempt " + (startingIndex + i + 1) + ": "); // Adiciona o índice real
             sb.append("[");
 
             // Obtém e exibe as cores do código da tentativa
@@ -240,10 +212,27 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                     sb.append(", ");
                 }
             }
-            sb.append("]    " + result[0] + " " + result[1]);  // Exibe A e B
-            sb.append(EOL);
+            sb.append("] -> A: " + result[0] + ", B: " + result[1] + " |\n");  // Exibe A e B
         }
-        
+        sb.append("|-----------------------------|\n");
+
+        // Secret Code
+        sb.append("| Secret Code: ");
+        if (wasSecretRevealed()) {
+            sb.append(secretCode.toString() + " |\n");
+        } else {
+            sb.append("[");
+            for (int i = 0; i < secretCode.getLength(); i++) {
+                sb.append("?");
+                if (i < secretCode.getLength() - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("] |\n");
+        }
+
+        // Borda inferior
+        sb.append("-----------------------------\n");
 
         return sb.toString();
     }
