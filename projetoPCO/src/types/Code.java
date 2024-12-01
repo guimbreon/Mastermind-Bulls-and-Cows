@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-//All documentation is needed.
-
 public class Code implements Cloneable {
 
     // Stores the list of Colours representing the code.
@@ -49,8 +47,9 @@ public class Code implements Cloneable {
     		throw new IllegalStateException("Code lengths must match for ");
 		}
 		
-		int correctPositions = 0; //a. - num de cores certas no sitio certo
-		int correctColour = 0; //b. - num de cores certas no sitio errado
+		int correctPositions = 0; //a. - number of correct colors in the right spot
+		int correctColour = 0; //b. - number of correct colors in the wrong spot
+
 		
 		List<Colour> unmatchedThis = new ArrayList<>();
 		List<Colour> unmatchedOther = new ArrayList<>();

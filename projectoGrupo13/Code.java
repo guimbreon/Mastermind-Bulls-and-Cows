@@ -1,10 +1,9 @@
 package types;
 
 import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Objects;
-
-//All documentation is needed.
 
 public class Code implements Cloneable {
 
@@ -19,10 +18,7 @@ public class Code implements Cloneable {
      *             The list is defensively copied to ensure immutability.
      */
     public Code(List<? extends Colour> code) {
-//    	É PRECISO SER DEFENSIVO???
-//        if (code == null) {
-//            throw new IllegalArgumentException("Code list cannot be null.");
-//        }
+
         this.code = new ArrayList<>(code);
     }
 
@@ -51,8 +47,9 @@ public class Code implements Cloneable {
     		throw new IllegalStateException("Code lengths must match for ");
 		}
 		
-		int correctPositions = 0; //a. - num de cores certas no sitio certo
-		int correctColour = 0; //b. - num de cores certas no sitio errado
+		int correctPositions = 0; //a. - number of correct colors in the right spot
+		int correctColour = 0; //b. - number of correct colors in the wrong spot
+
 		
 		List<Colour> unmatchedThis = new ArrayList<>();
 		List<Colour> unmatchedOther = new ArrayList<>();
@@ -82,7 +79,7 @@ public class Code implements Cloneable {
      */
     @Override
     public String toString() {
-        return code.toString(); //ns se tá bem
+        return code.toString();
     }
     
     /**
@@ -110,30 +107,14 @@ public class Code implements Cloneable {
     	if (this == obj) {
     		return true;
     	}
-    	if (obj == null || obj.getClass() != this.getClass()) {
+    	if (obj == null || !(obj instanceof Code)) {//verifies if it is Code or a derivative of Code
     		return false;
     	}
     	Code other = (Code) obj;
     	return Objects.equals(this.code, other.code);
     }
     
-    
-    /*
-     * ESCREVER ISTO
-     * 
-     * BASICAMENTE SERVE PARA OBTER AS CORES DENTRO DO CÓDIGO
-     * */
-    public List<Colour> getUniqueColours(){
-    	List<Colour> uniqueColours = new ArrayList<>();
-    	for(Colour color: this.code) {
-    		if(!(uniqueColours.contains(color))) {
-    			uniqueColours.add(color);
-    		}
-    	}
-    	
-    	return uniqueColours;
-    }
-    
+       
 
 
 }

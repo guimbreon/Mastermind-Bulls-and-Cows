@@ -8,13 +8,13 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 
     // Attributes needed for the game logic
     protected int currentScore; // Stores the current score of the game
-    protected List<Object[]> attempts; //VERIFY IF ITS REALLY CODE
+    protected List<Object[]> attempts; 
     protected int numberOfTrials; // Tracks the number of trials made in the current round
     protected boolean secretRevealed; // Indicates if the secret code has been revealed
     protected Code secretCode;
     protected Colour[] colours; // Array of colours used in the game
     protected int size; // Size of the secret code
-    protected int seed; // Seed
+    protected int seed; 
     protected Random random; // Random generator for secret code and hints
 
     /**
@@ -155,22 +155,22 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     @Override
     public Code bestTrial() {
         if (attempts == null || attempts.isEmpty()) {
-            return null; // Retorna null se a lista de tentativas estiver vazia
+            return null; // returns null if the list of tries is null
         }
 
         Code bestTrial = null;
-        int bestA = -1; // Inicializa com valores impossíveis para facilitar a comparação
+        int bestA = -1; // impossible values to make it easy to compare
         int bestB = -1;
 
         for (Object[] attempt : attempts) {
-        	int[] resultados = (int[]) attempt[1];  // Extraímos
+        	int[] resultados = (int[]) attempt[1];  // we extracted
         	Code codigo = (Code) attempt[0];
         	
             int[] correct = secretCode.howManyCorrect(codigo);
             int a = correct[0];
             int b = correct[1];
 
-            // Atualiza o melhor teste baseado nas condições
+            // best try based in the conditions
             if (a > bestA || 
                 (a == bestA && b > bestB) || 
                 (a == bestA && b == bestB && (bestTrial == null || attempt.toString().compareTo(bestTrial.toString()) < 0))) {
@@ -180,7 +180,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                 bestB = b;
             }
         }
-        return bestTrial; // Retorna o melhor teste encontrado
+        return bestTrial; 
     }
 
 
@@ -227,7 +227,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      */
     public static List<Object[]> getLast10Attempts(List<Object[]> attempts) {
         int size = attempts.size();
-        int last10 = Math.max(size - 10, 0);  // Garante que o índice não seja negativo
+        int last10 = Math.max(size - 10, 0);  // make sure its not negative
         return attempts.subList(last10, size); 
     }
 
@@ -245,7 +245,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         
         String EOL = System.lineSeparator();
 
-        // Current Score e Number of Trials
+        // current score and number of trials
         sb.append("Number of Trials = " + numberOfTrials + EOL);
         sb.append("Score = " + currentScore + EOL);
         
@@ -271,26 +271,26 @@ public abstract class AbstractMastermindGame implements MastermindGame {
             sb.append("\n");    	
         }
 
-        // Obtém as últimas 10 tentativas (considerando o novo formato de attempts)
-        List<Object[]> last10Attempts = getLast10Attempts(attempts); // Agora isso retorna Object[]
-
-        // Iterando sobre as últimas 10 tentativas
+        // 10 best attempts
+        List<Object[]> last10Attempts = getLast10Attempts(attempts); 
+        
+        // iteract last10Attempts
         for (int i = 0; i < last10Attempts.size(); i++) {
-            Object[] attempt = last10Attempts.get(i); // Cada item é um array de Object[]: [Code, int[]]
-            Code code = (Code) attempt[0];  // Extraímos o Code
-            int[] result = (int[]) attempt[1];  // Extraímos o array de resultados [A, B]
+            Object[] attempt = last10Attempts.get(i); 
+            Code code = (Code) attempt[0];  
+            int[] result = (int[]) attempt[1]; 
 
             sb.append("[");
 
-            // Obtém e exibe as cores do código da tentativa
-            List<Colour> attemptCode = code.getCode(); // Assumindo que Code tem um método getCode() que retorna uma lista de cores
+            
+            List<Colour> attemptCode = code.getCode(); 
             for (int j = 0; j < attemptCode.size(); j++) {
-                sb.append(attemptCode.get(j)); // Imprime a cor da tentativa
+                sb.append(attemptCode.get(j)); 
                 if (j < attemptCode.size() - 1) {
                     sb.append(", ");
                 }
             }
-            sb.append("]    " + result[0] + " " + result[1]);  // Exibe A e B
+            sb.append("]    " + result[0] + " " + result[1]);  //to show A and B
             sb.append(EOL);
         }
         
