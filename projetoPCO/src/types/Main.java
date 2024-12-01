@@ -49,11 +49,12 @@ public class Main {
 								//every three rounds it'll ask if the user wants a hint
 								System.out.println("Do you want some hints? Type 'HINT' for a little help!\n But beware, it'll decrease your points in the end!\n");
 								String hint = scanner.nextLine();
+								
+								clearConsole();
 								if(hint.equals("HINT")) {
 									System.out.println("There is the color '" + getColorName(multiColourGame.hint()) + "' in the secret Code!\n");
-								}else {
-									clearConsole();
 								}
+								System.out.println(multiColourGame.toString());
 							}
 						}
 						Code code = createCode(MultiColour.values(), "multiColour");
@@ -68,7 +69,6 @@ public class Main {
 						System.out.println(multiColourGame.toString());
 					}else {
 						//if they lose
-						//se nao mensagem de derrota + o bestTrial e o codigo secreto(que eu acho q aparece no toString já
 						System.out.println("oh...look like you didn't win this time :(");
 						System.out.println("Your best trial was: " + multiColourGame.bestTrial());
 						System.out.println("And secret code is: " + multiColourGame.secretCode + "\n");
@@ -93,9 +93,12 @@ public class Main {
 								//every three rounds it'll ask if the user wants a hint
 								System.out.println("Do you want some hints? Type 'HINT' for a little help!\n But beware, it'll decrease your points in the end!\n");
 								String hint = scanner.nextLine();
+
+								clearConsole();
 								if(hint.equals("HINT")) {
 									System.out.println("There is the color '" + getColorName(binaryGame.hint()) + "' in the secret Code!\n");
 								}
+								System.out.println(binaryGame.toString());
 							}
 
 						}
@@ -111,7 +114,6 @@ public class Main {
 						System.out.println(binaryGame.toString());
 					}else {
 						//if they lose
-						//se nao mensagem de derrota + o bestTrial e o codigo secreto(que eu acho q aparece no toString já
 						System.out.println("oh...look like you didn't win this time :(");
 						System.out.println("Your best trial was: " + binaryGame.bestTrial());
 						System.out.println("And secret code is: " + binaryGame.secretCode + "\n");

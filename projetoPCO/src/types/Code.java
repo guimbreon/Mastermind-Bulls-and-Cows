@@ -45,14 +45,6 @@ public class Code implements Cloneable {
     }
 
 	public int[] howManyCorrect(Code other) {
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
-		System.out.println("está aq no CODE?");
 		if(other == null || other.getLength() != this.getLength()) {
     		throw new IllegalStateException("Code lengths must match for ");
 		}

@@ -17,7 +17,6 @@ public class BullsAndCows extends AbstractMastermindGame {
 	 */
 	public BullsAndCows(int seed, int size, Colour[] colours) {
 		super(seed, size, colours);
-		// TODO Auto-generated constructor stub
 		}
 	
 	/**
@@ -28,7 +27,6 @@ public class BullsAndCows extends AbstractMastermindGame {
 	 */
 	@Override
 	public boolean isRoundFinished() {
-		// TODO Auto-generated method stub
 		if (wasSecretRevealed() || getNumberOfTrials() >= MAX_TRIALS) {
 			return true;
 		}
