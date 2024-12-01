@@ -11,7 +11,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     protected List<Object[]> attempts; //VERIFY IF ITS REALLY CODE
     protected int numberOfTrials; // Tracks the number of trials made in the current round
     protected boolean secretRevealed; // Indicates if the secret code has been revealed
-    protected Code secretCode;
+    Code secretCode;
     protected Colour[] colours; // Array of colours used in the game
     protected int size; // Size of the secret code
     protected int seed; // Seed
@@ -71,7 +71,8 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         	addTrial(x);
          }
         
-        if(x.equals(secretCode) && !wasSecretRevealed()) {
+        
+		if(x.equals(secretCode) && !wasSecretRevealed()) {
         	secretRevealed = true;
             updateScore();
         }
@@ -102,19 +103,38 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 	        attempts.add(trial);
 	    }
     }
-
     
     /**
      * Generates a new secret code for the game.
      */
     private void genSecretCode() {
         List<Colour> secretCodeList = new ArrayList<>();
+        
 		int randomIndex;
     	for(int i = 0; i < size; i++) {
     		randomIndex = random.nextInt(colours.length);
     		secretCodeList.add(colours[randomIndex]);
     	}
-    	secretCode = new Code(secretCodeList);    	
+    	
+    	
+    	secretCode = new Code(secretCodeList);
+    }
+    
+    /**
+     * Generates a new secret code for the game.
+     */
+    private void genSecretCodeBinary() {
+        List <BinaryColour> secretCodeList = new ArrayList<>();
+        
+		int randomIndex;
+    	for(int i = 0; i < size; i++) {
+    		randomIndex = random.nextInt(colours.length);
+    		secretCodeList.add((BinaryColour) colours[randomIndex]);
+    	}
+
+		secretCode = new BullsAndCowsCode(secretCodeList);	    	
+	      
+    	
     }
     
     /**
@@ -122,7 +142,11 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      */
     @Override
     public void startNewRound() {
-    	genSecretCode();
+    	if(colours.length == 2) {
+        	genSecretCodeBinary();    		
+    	}else {
+        	genSecretCode();
+    	}
     	this.numberOfTrials = 0;
     	this.secretRevealed = false;
     }

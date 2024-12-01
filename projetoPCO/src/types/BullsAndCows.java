@@ -17,7 +17,6 @@ public class BullsAndCows extends AbstractMastermindGame {
 	 */
 	public BullsAndCows(int seed, int size, Colour[] colours) {
 		super(seed, size, colours);
-		System.out.println(secretCode);
 		// TODO Auto-generated constructor stub
 		}
 	

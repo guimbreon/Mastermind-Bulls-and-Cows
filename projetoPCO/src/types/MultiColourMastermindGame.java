@@ -15,6 +15,7 @@ public class MultiColourMastermindGame extends AbstractMastermindGame{
      * @param size    the number of positions in the secret code.
      * @param colours an array of possible colors for the code.
      */
+	
 	public MultiColourMastermindGame(int seed, int size, Colour[] colours) {
 		super(seed, size, colours);
 	}

@@ -228,7 +228,7 @@ public class Main {
 			return new Code(attempt);
 		}else {
 			ArrayList<BinaryColour> attempt = transformToBinary(splitCode);
-			return new Code(attempt);
+			return new BullsAndCowsCode(attempt);
 			
 		}
 	}
