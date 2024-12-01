@@ -39,7 +39,6 @@ public class Main {
 					
 					MultiColourMastermindGame multiColourGame = new MultiColourMastermindGame(seed, diff, MultiColour.values());
 					
-					
 					while(!multiColourGame.isRoundFinished()) {
 						numberOfTrials= multiColourGame.numberOfTrials;
 						clearConsole();
@@ -262,10 +261,8 @@ public class Main {
 		
 	    if (colour instanceof MultiColour) {
 	    	return ((MultiColour) colour).name();
-	    	
 	    } else if (colour instanceof BinaryColour) {
 	    	return ((BinaryColour) colour).name();
-	    	
 	    }
 	    return "Unknown Color";//just to check
 	}

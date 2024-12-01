@@ -115,7 +115,7 @@ public class Code implements Cloneable {
     	if (this == obj) {
     		return true;
     	}
-    	if (obj == null || obj.getClass() != this.getClass()) {
+    	if (obj == null || !(obj instanceof Code)) {//verifies if it is Code or a derivative of Code
     		return false;
     	}
     	Code other = (Code) obj;

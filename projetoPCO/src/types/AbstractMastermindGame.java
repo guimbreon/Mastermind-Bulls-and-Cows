@@ -71,12 +71,10 @@ public abstract class AbstractMastermindGame implements MastermindGame {
         	addTrial(x);
          }
         
-        
 		if(x.equals(secretCode) && !wasSecretRevealed()) {
         	secretRevealed = true;
             updateScore();
         }
-        
     }
     
     /**
@@ -86,7 +84,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      */
     private void addTrial(Code x) {
     	boolean exists = false;
-
     	
 	    for (Object[] attempt : attempts) {
 	        Code existingCode = (Code) attempt[0]; //check code
@@ -95,7 +92,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 	            break;
 	        }
 	    }
-
 	    
 	    if (!exists) {
 	        int[] result = secretCode.howManyCorrect(x); 
@@ -103,7 +99,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 	        attempts.add(trial);
 	    }
     }
-    
+        
     /**
      * Generates a new secret code for the game.
      */
@@ -184,9 +180,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
                 bestB = b;
             }
         }
-        
-
-
         return bestTrial; // Retorna o melhor teste encontrado
     }
 
