@@ -11,7 +11,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
     protected List<Object[]> attempts; //VERIFY IF ITS REALLY CODE
     protected int numberOfTrials; // Tracks the number of trials made in the current round
     protected boolean secretRevealed; // Indicates if the secret code has been revealed
-    Code secretCode;
+    protected Code secretCode;
     protected Colour[] colours; // Array of colours used in the game
     protected int size; // Size of the secret code
     protected int seed; // Seed

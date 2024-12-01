@@ -1,6 +1,7 @@
 package types;
 
 import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -87,7 +88,7 @@ public class Code implements Cloneable {
      */
     @Override
     public String toString() {
-        return code.toString(); //ns se tá bem
+        return code.toString();
     }
     
     /**
