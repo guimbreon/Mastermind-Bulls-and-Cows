@@ -114,23 +114,7 @@ public class Code implements Cloneable {
     	return Objects.equals(this.code, other.code);
     }
     
-    
-    /**
-     * Extracts the unique Colours from this Code instance.
-     *
-     * @return a list of unique Colours in this code, maintaining their order of occurrence.
-     */
-    public List<Colour> getUniqueColours(){
-    	List<Colour> uniqueColours = new ArrayList<>();
-    	for(Colour color: this.code) {
-    		if(!(uniqueColours.contains(color))) {
-    			uniqueColours.add(color);
-    		}
-    	}
-    	
-    	return uniqueColours;
-    }
-    
+       
 
 
 }

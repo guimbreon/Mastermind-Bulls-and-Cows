@@ -66,7 +66,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
      */
     @Override
     public void play(Code x) {
-    	System.out.println(secretCode);
     	numberOfTrials += 1;
         if(!wasSecretRevealed()) {
         	addTrial(x);
@@ -145,9 +144,7 @@ public abstract class AbstractMastermindGame implements MastermindGame {
 
         for (Object[] attempt : attempts) {
         	int[] resultados = (int[]) attempt[1];  // Extraímos
-        	//System.out.println(attempt[0] + " ");
         	Code codigo = (Code) attempt[0];
-        	System.out.println(codigo.toString() + ": a_" + resultados[0] + "  b_" + resultados[1]);
         	
             int[] correct = secretCode.howManyCorrect(codigo);
             int a = correct[0];
@@ -164,7 +161,6 @@ public abstract class AbstractMastermindGame implements MastermindGame {
             }
         }
         
-        System.out.println("Secret Code:" + secretCode);
 
 
         return bestTrial; // Retorna o melhor teste encontrado
