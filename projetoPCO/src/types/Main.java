@@ -11,9 +11,14 @@ public class Main {
 	protected static Scanner scanner = new Scanner(System.in);
 	protected static boolean stillPlaying = true;
 	protected static boolean firstPlay = true;
-	
 	protected static int seed;
 
+	
+	 /**
+     * Main entry point of the program. Manages the game selection, initialization, and loops.
+     * 
+     * @param args Command-line arguments (not used).
+     */
 	public static void main(String[] args) {
 		
 		
@@ -83,14 +88,23 @@ public class Main {
 		System.out.println("THANKS FOR PLAYING MASTERMIND GAME!");
 	}
 	
+	private static void gameDifficulty() {
+		
+	}
 	
+	/**
+     * Clears the console screen by printing blank lines.
+     */
 	private static void ClearConsole() {
         for (int i = 0; i < 50; i++) {
             System.out.println("\n");
         }	
 	}
 	
-	
+	/**
+     * Handles the decision to keep playing or exit the game.
+     * Updates the `stillPlaying` flag based on user input.
+     */
 	private static void keepPlaying() {
 		System.out.println("Do you wish to keep playing or no?\n	1-Yes\n	2-No");
 		String keepPlay = scanner.nextLine();
@@ -104,6 +118,13 @@ public class Main {
 	}
 	
 	
+	 /**
+     * Creates a `Code` object based on user input and available colors.
+     * 
+     * @param availColours The array of available colors for the game mode.
+     * @param type         The type of game mode (e.g., "multiColour" or "binary").
+     * @return A `Code` object representing the user's guess.
+     */	
 	private static Code createCode(Colour[] availColours, String type) {
 		String allColours = "";
 		
@@ -135,7 +156,12 @@ public class Main {
 		}
 	}
 
-
+	/**
+     * Transforms a string array of color codes into a list of `BinaryColour` objects.
+     * 
+     * @param stringColors An array of color codes entered by the user.
+     * @return A list of `BinaryColour` objects.
+     */
 	private static ArrayList<BinaryColour> transformToBinary(String[] stringColors) {
 		ArrayList<BinaryColour> result = new ArrayList<>();
         for (String colorCode : stringColors) {
@@ -149,7 +175,12 @@ public class Main {
         return result;
 	}
 
-
+	/**
+     * Retrieves the name of a color as a string.
+     * 
+     * @param colour The color object (either `MultiColour` or `BinaryColour`).
+     * @return The name of the color, or "Unknown Color" if not recognized.
+     */
 	private static String getColorName(Colour colour) {
 		
 	    if (colour instanceof MultiColour) {
@@ -162,7 +193,12 @@ public class Main {
 	    return "Unknown Color";//just to check
 	}
 	
-	
+    /**
+     * Transforms a string array of color codes into a list of `MultiColour` objects.
+     * 
+     * @param stringColors An array of color codes entered by the user.
+     * @return A list of `MultiColour` objects.
+     */
 	private static ArrayList<MultiColour> transformToColors(String[] stringColors) {
         
 		ArrayList<MultiColour> result = new ArrayList<>();

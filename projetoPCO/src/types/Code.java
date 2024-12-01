@@ -19,10 +19,7 @@ public class Code implements Cloneable {
      *             The list is defensively copied to ensure immutability.
      */
     public Code(List<? extends Colour> code) {
-//    	É PRECISO SER DEFENSIVO???
-//        if (code == null) {
-//            throw new IllegalArgumentException("Code list cannot be null.");
-//        }
+
         this.code = new ArrayList<>(code);
     }
 
@@ -118,11 +115,11 @@ public class Code implements Cloneable {
     }
     
     
-    /*
-     * ESCREVER ISTO
-     * 
-     * BASICAMENTE SERVE PARA OBTER AS CORES DENTRO DO CÓDIGO
-     * */
+    /**
+     * Extracts the unique Colours from this Code instance.
+     *
+     * @return a list of unique Colours in this code, maintaining their order of occurrence.
+     */
     public List<Colour> getUniqueColours(){
     	List<Colour> uniqueColours = new ArrayList<>();
     	for(Colour color: this.code) {

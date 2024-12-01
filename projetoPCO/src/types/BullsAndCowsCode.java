@@ -5,10 +5,26 @@ import java.util.List;
 
 public class BullsAndCowsCode extends Code{
 	
+	/**
+     * Constructs a BullsAndCowsCode instance with a given list of BinaryColour elements.
+     *
+     * @param code the list of BinaryColour elements representing the code.
+     */
 	public BullsAndCowsCode(List<BinaryColour> code) {
 		super(code);
 	}
 	
+	/**
+     * Compares this code with another code and calculates:
+     * - The number of correct colors in the correct positions.
+     * - The number of correct colors in incorrect positions.
+     *
+     * @param other the code to compare with.
+     * @return an integer array where:
+     *         - The first element is the number of correct colors in the correct positions.
+     *         - The second element is the number of correct colors in incorrect positions.
+     * @throws IllegalStateException if the provided code is null or has a different length from this code.
+     */
 	public int[] howManyCorrect(Code other) {
 		if(other == null || other.getLength() != this.getLength()) {
     		throw new IllegalStateException("Code lengths must match for ");
