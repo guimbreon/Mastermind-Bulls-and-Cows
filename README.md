@@ -1,9 +1,3 @@
-08-12-2024 20:10
-
-Status: #adult
-
-Tags: [[University]] [[FCUL]] [[Bachelors]] [[Java]]
-
 ---
 ## Game Description
 
