@@ -1,5 +1,8 @@
----
+# Mastermind - Bulls and Cows Project
 
+This README is also available in English. [Click here](README.md)
+
+---
 ## Descrição do Jogo
 
 **Mastermind** é um jogo de tabuleiro clássico em que um jogador, chamado **Mestre do Código**, cria um código secreto composto por uma sequência de quatro cores, escolhidas entre seis cores disponíveis. O segundo jogador, chamado **Quebra-Código**, tenta adivinhar o código por meio de uma série de tentativas. Após cada palpite, o Mestre do Código fornece um retorno na forma de dois números:
