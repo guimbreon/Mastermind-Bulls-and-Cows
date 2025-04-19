@@ -1,3 +1,5 @@
+# Mastermind - Bulls and Cows Project
+
 This README is also available in Portuguese. [Click here](README-PT.md)
 
 ---
