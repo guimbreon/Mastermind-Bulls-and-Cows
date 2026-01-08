@@ -2,6 +2,9 @@
 
 This README is also available in English. [Click here](README.md)
 
+Project made by:
+[Guilherme Soares](https://github.com/guimbreon) && [Vitória Correia](https://github.com/vitoriateixeiracorreia)
+
 ---
 ## Descrição do Jogo
 
